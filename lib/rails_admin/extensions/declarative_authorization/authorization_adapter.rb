@@ -31,7 +31,11 @@ module RailsAdmin
         # and bulk_delete/destroy actions and should return a scope which limits the records
         # to those which the user can perform the given action on.
         def query(action, abstract_model)
-          abstract_model.model.with_permissions_to action
+          begin
+            abstract_model.model.with_permissions_to action
+          rescue ::Authorization::NotAuthorized
+            abstract_model.model.all
+          end
         end
 
         # This is called in the new/create actions to determine the initial attributes for new
