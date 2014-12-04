@@ -7,7 +7,7 @@ module RailsAdmin
       class AuthorizationAdapter
         # See the +authorize_with+ config method for where the initialization happens.
         def initialize(controller)
-
+          @controller = controller
         end
 
         # This method is called in every controller action and should raise an exception
@@ -16,7 +16,7 @@ module RailsAdmin
         # AbstractModel instance that applies. The third argument is the actual model
         # instance if it is available.
         def authorize(action, abstract_model = nil, model_object = nil)
-
+          @controller.permitted_to!(action, model_object || abstract_model && abstract_model.model) if action
         end
 
         # This method is called primarily from the view to determine whether the given user
@@ -24,14 +24,14 @@ module RailsAdmin
         # This takes the same arguments as +authorize+. The difference is that this will
         # return a boolean whereas +authorize+ will raise an exception when not authorized.
         def authorized?(action, abstract_model = nil, model_object = nil)
-
+          @controller.permitted_to?(action, model_object || abstract_model && abstract_model.model) if action
         end
 
         # This is called when needing to scope a database query. It is called within the list
         # and bulk_delete/destroy actions and should return a scope which limits the records
         # to those which the user can perform the given action on.
         def query(action, abstract_model)
-          
+          abstract_model.model.with_permission_to action
         end
 
         # This is called in the new/create actions to determine the initial attributes for new
