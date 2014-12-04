@@ -24,8 +24,7 @@ module RailsAdmin
         # This takes the same arguments as +authorize+. The difference is that this will
         # return a boolean whereas +authorize+ will raise an exception when not authorized.
         def authorized?(action, abstract_model = nil, model_object = nil)
-          #@controller.permitted_to?(action, model_object || abstract_model && abstract_model.model) if action
-          true
+          @controller.permitted_to?(action, model_object || abstract_model && abstract_model.model) if action
         end
 
         # This is called when needing to scope a database query. It is called within the list
