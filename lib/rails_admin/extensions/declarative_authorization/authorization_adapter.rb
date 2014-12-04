@@ -42,7 +42,9 @@ module RailsAdmin
         # records. It should return a hash of attributes which match what the user
         # is authorized to create.
         def attributes_for(action, abstract_model)
-          abstract_model.model.attribute_names || {}
+          ret = {}
+          abstract_model.model.attribute_names.each {|v| ret[v]=v}
+          ret
         end
       end
     end
