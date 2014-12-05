@@ -43,7 +43,7 @@ module RailsAdmin
         # is authorized to create.
         def attributes_for(action, abstract_model)
           ret = {}
-          abstract_model.model.attribute_names.each { |v| ret[v] = v } if authorized? (action, abstract_model)
+          abstract_model.model.attribute_names.each { |v| ret[v] = v } if @controller.permitted_to?(action, model_object || abstract_model && abstract_model.model)
           ret
         end
       end
