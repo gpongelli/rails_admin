@@ -23,7 +23,7 @@ RailsAdmin is a Rails engine that provides an easy-to-use interface for managing
 * Search and filtering
 * Export data to CSV/JSON/XML
 * Authentication (via [Devise](https://github.com/plataformatec/devise) or other)
-* Authorization (via [Cancan](https://github.com/ryanb/cancan))
+* Authorization (via [Cancan](https://github.com/ryanb/cancan)) or [declarative_authorization](https://github.com/stffn/declarative_authorization))
 * User action history (via [PaperTrail](https://github.com/airblade/paper_trail))
 * Supported ORMs
   * ActiveRecord
